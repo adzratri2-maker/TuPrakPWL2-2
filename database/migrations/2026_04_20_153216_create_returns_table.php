@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('returns', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+
+            $table->foreignId('loan_detail_id')->constrained('loan_detail')->onDelete('cascade');
+
+            $table->boolean('charge')->default(false);
+            $table->integer('amount')->nullable();
+
             $table->timestamps();
         });
     }
